@@ -4,7 +4,7 @@ The movies are stored in `/data` by genre.
 
 ## Preview
 
-Preview the demo live [here](https://watch-app.vercel.app/):
+Preview the demo live [here](https://watch-app.vercel.app/)
 
 ## How to use
 
