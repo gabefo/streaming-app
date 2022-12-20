@@ -2,6 +2,10 @@ import { Icon } from '@iconify/react'
 import { ReactNode, useEffect, useRef, useState } from 'react'
 import { styled } from 'stitches.config'
 
+const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent
+
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent)
+
 const Root = styled('div', {
   position: 'relative',
 
@@ -51,10 +55,6 @@ const Button = styled('button', {
 
   '&:hover': {
     opacity: 0.8,
-  },
-
-  '@touch': {
-    display: 'none',
   },
 
   variants: {
@@ -118,16 +118,20 @@ export function ScrollView({ children }: ScrollViewProps) {
   return (
     <Root>
       <Content ref={ref}>{children}</Content>
-      {hasContentLeft ? (
-        <Button align="left" onClick={() => scroll(-1)}>
-          <Icon icon="mdi:chevron-left" />
-        </Button>
-      ) : null}
-      {hasContentRight ? (
-        <Button align="right" onClick={() => scroll(1)}>
-          <Icon icon="mdi:chevron-right" />
-        </Button>
-      ) : null}
+      {!isMobile && (
+        <>
+          {hasContentLeft ? (
+            <Button align="left" onClick={() => scroll(-1)}>
+              <Icon icon="mdi:chevron-left" />
+            </Button>
+          ) : null}
+          {hasContentRight ? (
+            <Button align="right" onClick={() => scroll(1)}>
+              <Icon icon="mdi:chevron-right" />
+            </Button>
+          ) : null}
+        </>
+      )}
     </Root>
   )
 }
