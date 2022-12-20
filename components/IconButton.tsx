@@ -5,8 +5,6 @@ const IconButton = styled('button', {
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  width: 48,
-  height: 48,
   p: 0,
   border: 0,
   outline: 0,
@@ -16,12 +14,39 @@ const IconButton = styled('button', {
   fontSize: 24,
   fontWeight: 400,
   lineHeight: 1,
+  textDecoration: 'none',
   cursor: 'pointer',
   userSelect: 'none',
   transition: 'background-color 0.1s',
 
   '&:hover': {
     bg: '$hover',
+  },
+
+  variants: {
+    size: {
+      small: {
+        p: 4,
+      },
+      medium: {
+        p: 8,
+      },
+      large: {
+        p: 12,
+      },
+    },
+    edge: {
+      start: {
+        ml: -8,
+      },
+      end: {
+        mr: -8,
+      },
+    },
+  },
+
+  defaultVariants: {
+    size: 'medium',
   },
 })
 
