@@ -17,7 +17,7 @@ export default function useScrollTrigger({ threshold = 10 }: ScrollTriggerOption
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [threshold])
 
   return trigger
 }
