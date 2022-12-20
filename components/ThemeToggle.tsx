@@ -21,7 +21,7 @@ export default function ThemeToggle() {
 
   return (
     <Tooltip content={isDark ? 'Light mode' : 'Dark mode'}>
-      <IconButton onClick={handleClick}>
+      <IconButton size="large" onClick={handleClick}>
         <Icon icon={isDark ? 'mdi:brightness-7' : 'mdi:brightness-4'} />
       </IconButton>
     </Tooltip>
