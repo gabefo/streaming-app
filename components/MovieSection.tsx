@@ -1,9 +1,13 @@
+import { Icon } from '@iconify/react'
 import useInView from 'hooks/useInView'
 import Movie from 'interfaces/movie'
+import Link from 'next/link'
 import { useRef } from 'react'
 import { styled } from 'stitches.config'
 import useSWRImmutable from 'swr/immutable'
 import Container from './Container'
+import Flex from './Flex'
+import IconButton from './IconButton'
 import MovieCard from './MovieCard'
 import MovieSkeleton from './MovieSkeleton'
 import { ScrollView, View } from './ScrollView'
@@ -41,10 +45,17 @@ export default function MovieSection({ title, genre }: SectionProps) {
 
   return (
     <Section ref={ref}>
-      <Container gutters css={{ mb: 16 }}>
-        <Text as="h6" variant="title">
-          {title}
-        </Text>
+      <Container gutters css={{ mb: 8 }}>
+        <Flex align="center" justify="between">
+          <Text as="h6" variant="title">
+            {title}
+          </Text>
+          <Link href={`/movies/${genre}`} passHref legacyBehavior>
+            <IconButton as="a" edge="end">
+              <Icon icon="mdi:arrow-right" />
+            </IconButton>
+          </Link>
+        </Flex>
       </Container>
       <Container>
         <ScrollView>
