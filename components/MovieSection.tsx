@@ -1,6 +1,8 @@
 import { Icon } from '@iconify/react'
 import useInView from 'hooks/useInView'
+import Category from 'interfaces/category'
 import Movie from 'interfaces/movie'
+import fetcher from 'lib/fetcher'
 import Link from 'next/link'
 import { useRef } from 'react'
 import { styled } from 'stitches.config'
@@ -13,33 +15,21 @@ import MovieSkeleton from './MovieSkeleton'
 import { ScrollView, View } from './ScrollView'
 import Text from './Text'
 
-const fetcher = async (url: string) => {
-  const res = await fetch(url)
-  const data = await res.json()
-
-  if (res.status !== 200) {
-    throw new Error(data.message)
-  }
-
-  return data
-}
-
 const Section = styled('section', {
-  mb: 24,
+  mt: 24,
 })
 
 interface SectionProps {
-  title: string
-  genre: string
+  category: Category
 }
 
-export default function MovieSection({ title, genre }: SectionProps) {
+export default function MovieSection({ category }: SectionProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   const isInView = useInView(ref, { rootMargin: '-48px', once: true })
 
   const { data } = useSWRImmutable<Movie[], Error>(
-    isInView ? `/api/movies?genre=${genre}` : null,
+    isInView ? `/api/movies?category=${category.id}` : null,
     fetcher
   )
 
@@ -48,9 +38,9 @@ export default function MovieSection({ title, genre }: SectionProps) {
       <Container gutters css={{ mb: 8 }}>
         <Flex align="center" justify="between">
           <Text as="h6" variant="title">
-            {title}
+            {category.name}
           </Text>
-          <Link href={`/movies/${genre}`} passHref legacyBehavior>
+          <Link href={category.href} passHref legacyBehavior>
             <IconButton as="a" edge="end">
               <Icon icon="mdi:arrow-right" />
             </IconButton>
@@ -59,7 +49,7 @@ export default function MovieSection({ title, genre }: SectionProps) {
       </Container>
       <Container>
         <ScrollView>
-          {(data || Array.from<undefined>(Array(16))).map((movie, index) => (
+          {(data || Array.from(Array<undefined>(24))).map((movie, index) => (
             <View key={index}>{movie ? <MovieCard movie={movie} /> : <MovieSkeleton />}</View>
           ))}
         </ScrollView>
