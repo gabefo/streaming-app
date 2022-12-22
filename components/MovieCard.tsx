@@ -8,6 +8,7 @@ const Card = styled('div', {
   flexDirection: 'column',
   p: 8,
   borderRadius: 8,
+  overflow: 'hidden',
   cursor: 'pointer',
 
   '&:hover': {
@@ -54,7 +55,7 @@ export default function MovieCard({ movie }: MovieCardProps) {
             src={image}
             alt={title}
             fill
-            sizes="(min-width: 1280px) 122px, (min-width: 960px) 20vw, (min-width: 600px) 25vw, 33vw"
+            sizes="(min-width: 1280px) 122px, (min-width: 960px) 16vw, (min-width: 600px) 25vw, 33vw"
           />
         ) : null}
       </ImageContainer>
