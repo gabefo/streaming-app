@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 
-interface ScrollTriggerOptions {
-  threshold?: number
-}
-
-export default function useScrollTrigger({ threshold = 10 }: ScrollTriggerOptions = {}) {
-  const [trigger, setTrigger] = useState(false)
+export default function useOffsetTop(threshold: number = 10) {
+  const [isOffset, setOffset] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
-      setTrigger(window.pageYOffset > threshold)
+      setOffset(window.pageYOffset > threshold)
     }
 
     window.addEventListener('scroll', handleScroll)
@@ -19,5 +15,5 @@ export default function useScrollTrigger({ threshold = 10 }: ScrollTriggerOption
     }
   }, [threshold])
 
-  return trigger
+  return isOffset
 }
