@@ -1,6 +1,6 @@
 # This is a movie catalog app created using Next.js, Stitches and TypeScript
 
-The movies are stored in `/data` by genre.
+The movies are stored in `/data` by category.
 
 ## Preview
 
