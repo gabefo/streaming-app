@@ -147,7 +147,7 @@ export const View = styled('div', {
   },
 
   '@md': {
-    width: '20%',
+    width: '16.6666%',
   },
 
   '@lg': {
