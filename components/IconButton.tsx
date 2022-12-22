@@ -26,13 +26,16 @@ const IconButton = styled('button', {
   variants: {
     size: {
       small: {
-        p: 4,
+        width: 32,
+        height: 32,
       },
       medium: {
-        p: 8,
+        width: 40,
+        height: 40,
       },
       large: {
-        p: 12,
+        width: 48,
+        height: 48,
       },
     },
     edge: {
