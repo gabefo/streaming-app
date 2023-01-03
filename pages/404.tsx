@@ -1,12 +1,15 @@
 import Logo from 'components/Logo'
 import Text from 'components/Text'
 import TitleAndMetaTags from 'components/TitleAndMetaTags'
+import type { GetStaticProps } from 'next'
+import { useTranslation } from 'next-i18next'
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { styled } from 'stitches.config'
 
 const Root = styled('div', {
   my: 12,
   mx: 'auto',
-  px: '$gap',
+  px: '$gutterX',
   maxWidth: 600,
 
   '@sm': {
@@ -14,17 +17,25 @@ const Root = styled('div', {
   },
 })
 
-export default function Page404() {
+export default function Page() {
+  const { t } = useTranslation('404')
+
   return (
     <Root>
       <TitleAndMetaTags />
       <Logo />
       <Text as="h6" variant="title" css={{ mt: 40, mb: 8 }}>
-        404. Not found
+        {t('title')}
       </Text>
       <Text as="p" color="secondary">
-        Sorry, we couldn’t find the page you’re looking for.
+        {t('description')}
       </Text>
     </Root>
   )
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale ?? 'en', ['404'])),
+  },
+})
