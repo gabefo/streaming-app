@@ -243,7 +243,7 @@ export default function MovieHero({ movie }: MovieHeroProps) {
               </div>
             </Flex>
           </Header>
-          <Text gutterBottom>{overview}</Text>
+          {overview ? <Text gutterBottom>{overview}</Text> : null}
           {cast.length > 0 ? (
             <Text gutterBottom>
               <b>{t('starring')}</b> {cast.map((person) => person.name).join(' • ')}
