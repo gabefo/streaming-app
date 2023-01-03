@@ -2,6 +2,13 @@
   "search": {
     "placeholder": "Pesquisar filmes e programas de TV"
   },
+  "appearance": "Aparência",
+  "theme": {
+    "light": "Claro",
+    "dark": "Escuro",
+    "device": "Tema do dispositivo"
+  },
+  "language": "Idioma",
   "movies": "Filmes",
   "shows": "Programas",
   "people": "Pessoas",
