@@ -6,6 +6,7 @@ const Text = styled('span', {
   variants: {
     variant: {
       title: {
+        display: 'block',
         fontSize: '1.125rem',
         fontWeight: 600,
         lineHeight: '1.5rem',
@@ -23,18 +24,30 @@ const Text = styled('span', {
     },
 
     color: {
+      inherit: {
+        color: 'inherit',
+      },
       primary: {
         color: '$text',
       },
       secondary: {
         color: '$textSecondary',
       },
+      disabled: {
+        color: '$textDisabled',
+      },
+    },
+
+    gutterBottom: {
+      true: {
+        mb: 16,
+      },
     },
   },
 
   defaultVariants: {
     variant: 'body',
-    color: 'primary',
+    color: 'inherit',
   },
 })
 
