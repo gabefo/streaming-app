@@ -214,6 +214,7 @@ export default function MovieHero({ movie }: MovieHeroProps) {
         {backdrop_path && (
           <Cover>
             <Image
+              key={backdrop_path}
               src={buildImageURL(backdrop_path)}
               alt={title}
               priority
@@ -227,6 +228,7 @@ export default function MovieHero({ movie }: MovieHeroProps) {
           <Header>
             {poster_path && (
               <Poster
+                key={poster_path}
                 alt={title}
                 src={buildImageURL(poster_path, 'w154')}
                 width={154}
