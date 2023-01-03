@@ -1,19 +1,16 @@
 # This is a movie catalog app created using Next.js, Stitches and TypeScript
 
-The movies are stored in `/data` by category.
+## Demo
 
-## Preview
+https://watch-app.vercel.app/
 
-Preview the live demo [here](https://watch-app.vercel.app/)
+## Configuration
 
-## How to use
-
-Run the development server:
+1. [Create a TMDB account](https://www.themoviedb.org/) and apply for an API key
+2. Create a `.env.local` file and copy the contents of `.env.local.example` into it:
 
 ```bash
-npm run dev
-# or
-yarn dev
+cp .env.local.example .env.local
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Set the variable on `.env.local` with your TMDB access token (found in your account settings)
