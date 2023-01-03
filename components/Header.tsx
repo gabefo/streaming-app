@@ -1,6 +1,11 @@
+import useMediaQuery from 'hooks/useMediaQuery'
 import useOffsetTop from 'hooks/useOffsetTop'
 import { styled } from 'stitches.config'
+import Box from './Box'
+import LanguageSelect from './LanguageSelect'
 import Logo from './Logo'
+import SearchDesktop from './SearchDesktop'
+import SearchMobile from './SearchMobile'
 import ThemeToggle from './ThemeToggle'
 
 const StyledHeader = styled('header', {
@@ -8,19 +13,23 @@ const StyledHeader = styled('header', {
   top: 0,
   display: 'flex',
   alignItems: 'center',
-  justifyContent: 'space-between',
   width: '100%',
   height: '$header',
-  pl: '$gap',
+  pl: 16,
   pr: 8,
   bg: '$background',
   zIndex: 1,
   transition: 'box-shadow 0.2s ease-in-out',
 
+  '@md': {
+    pl: 24,
+    pr: 16,
+  },
+
   variants: {
     elevation: {
       true: {
-        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
+        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
       },
     },
   },
@@ -29,9 +38,15 @@ const StyledHeader = styled('header', {
 export default function Header() {
   const isOffset = useOffsetTop()
 
+  const isDesktop = useMediaQuery('(min-width: 960px)')
+
   return (
     <StyledHeader elevation={isOffset}>
       <Logo />
+      {isDesktop && <SearchDesktop />}
+      <Box css={{ flexGrow: 1 }} />
+      {!isDesktop && <SearchMobile />}
+      <LanguageSelect />
       <ThemeToggle />
     </StyledHeader>
   )
