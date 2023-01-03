@@ -6,7 +6,7 @@ import { styled } from 'stitches.config'
 const Root = styled('div', {
   my: 12,
   mx: 'auto',
-  px: '$gap',
+  px: '$gutterX',
   maxWidth: 600,
 
   '@sm': {
@@ -14,7 +14,7 @@ const Root = styled('div', {
   },
 })
 
-export default function ComingSoon() {
+export default function Page() {
   return (
     <Root>
       <TitleAndMetaTags />
