@@ -1,6 +1,7 @@
 import { styled } from 'stitches.config'
 
 const Container = styled('div', {
+  position: 'relative',
   width: '100%',
 
   '@lg': {
@@ -11,7 +12,7 @@ const Container = styled('div', {
   variants: {
     gutters: {
       true: {
-        px: '$gap',
+        px: '$gutterX',
       },
     },
   },
