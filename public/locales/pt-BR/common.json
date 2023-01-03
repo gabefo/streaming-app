@@ -6,7 +6,7 @@
   "theme": {
     "light": "Claro",
     "dark": "Escuro",
-    "device": "Tema do dispositivo"
+    "system": "Tema do dispositivo"
   },
   "language": "Idioma",
   "movies": "Filmes",
