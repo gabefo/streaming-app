@@ -1,0 +1,11 @@
+{
+  "search": {
+    "placeholder": "Rechercher des films et des séries TV"
+  },
+  "movies": "Films",
+  "shows": "Séries",
+  "people": "Gens",
+  "starring": "Avec",
+  "directed-by": "Réalisé par",
+  "similar-movies": "Films similaires"
+}

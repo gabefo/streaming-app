@@ -1,0 +1,11 @@
+{
+  "search": {
+    "placeholder": "Search for movies & TV shows"
+  },
+  "movies": "Movies",
+  "shows": "Shows",
+  "people": "People",
+  "starring": "Starring",
+  "directed-by": "Directed by",
+  "similar-movies": "Similar movies"
+}
