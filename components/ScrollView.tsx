@@ -1,5 +1,6 @@
 import { Icon } from '@iconify/react'
-import { ReactNode, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import type { ReactNode } from 'react'
 import { styled } from 'stitches.config'
 
 const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent
@@ -10,18 +11,18 @@ const Root = styled('div', {
   position: 'relative',
 
   '@lg': {
-    px: 'calc($gap - 8px)',
+    px: 'calc($gutterX - 8px)',
   },
 })
 
 const Content = styled('div', {
   position: 'relative',
   display: 'flex',
-  px: 'calc($gap - 8px)',
+  px: 'calc($gutterX - 8px)',
   overflowX: 'auto',
   scrollBehavior: 'smooth',
   scrollSnapType: 'x mandatory',
-  scrollPaddingInline: 'calc($gap - 8px)',
+  scrollPaddingInline: 'calc($gutterX - 8px)',
 
   '@lg': {
     px: 0,
@@ -69,7 +70,7 @@ const Button = styled('button', {
   },
 })
 
-interface ScrollViewProps {
+type ScrollViewProps = {
   children?: ReactNode
 }
 
