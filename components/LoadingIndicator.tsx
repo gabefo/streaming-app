@@ -1,5 +1,4 @@
-import { keyframes } from '@stitches/react'
-import { styled } from 'stitches.config'
+import { keyframes, styled } from 'stitches.config'
 
 const spin = keyframes({
   from: { transform: 'rotate(0deg)' },
