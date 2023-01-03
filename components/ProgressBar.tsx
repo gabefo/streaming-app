@@ -6,7 +6,7 @@ import { keyframes, styled } from 'stitches.config'
 const Overlay = styled('div', {
   position: 'fixed',
   inset: 0,
-  bg: 'rgba(238, 238, 238, 0.4)',
+  bg: '$overlay',
   zIndex: 1000,
 })
 

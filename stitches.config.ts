@@ -31,6 +31,7 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
         skeleton: 'rgba(0, 0, 0, 0.12)',
         tooltip: 'rgba(33, 33, 33, 0.9)',
         tooltipText: '#fff',
+        overlay: 'rgba(255, 255, 255, 0.3)',
       },
       fonts: {
         openSans: '"Open Sans", Arial, Helvetica, sans-serif',
@@ -121,6 +122,7 @@ export const darkTheme = createTheme('dark-theme', {
     border: 'rgba(255, 255, 255, 0.1)',
     hover: 'rgba(255, 255, 255, 0.05)',
     skeleton: 'rgba(255, 255, 255, 0.12)',
+    overlay: 'rgba(17, 17, 17, 0.3)',
   },
 })
 
