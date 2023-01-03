@@ -1,6 +1,8 @@
 import Footer from 'components/Footer'
 import Header from 'components/Header'
-import { ReactNode } from 'react'
+import LoadingScreen from 'components/LoadingScreen'
+import { useEffect, useState } from 'react'
+import type { ReactNode } from 'react'
 import { styled } from 'stitches.config'
 
 const Root = styled('div', {
@@ -10,16 +12,26 @@ const Root = styled('div', {
 })
 
 const Content = styled('div', {
-  pt: 'calc($sizes$header + 24px)',
+  pt: '$sizes$header',
   pb: 24,
   flexGrow: 1,
 })
 
-interface LayoutProps {
+type LayoutProps = {
   children: ReactNode
 }
 
 export default function MainLayout({ children }: LayoutProps) {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    setIsLoading(false)
+  }, [])
+
+  if (isLoading) {
+    return <LoadingScreen />
+  }
+
   return (
     <Root>
       <Header />
