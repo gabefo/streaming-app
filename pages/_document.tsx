@@ -1,4 +1,5 @@
 import React from 'react'
+import i18nextConfig from 'next-i18next.config'
 import NextDocument, { Html, Head, Main, NextScript } from 'next/document'
 import { getCssText, reset } from 'stitches.config'
 
@@ -13,10 +14,12 @@ const getCssAndReset = () => {
   return css
 }
 
-export default class Document extends NextDocument {
+class MyDocument extends NextDocument {
   render() {
+    const currentLocale = this.props.__NEXT_DATA__.locale ?? i18nextConfig.i18n.defaultLocale
+
     return (
-      <Html lang="en">
+      <Html lang={currentLocale}>
         <Head>
           <style id="stitches" dangerouslySetInnerHTML={{ __html: getCssAndReset() }} />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,3 +39,5 @@ export default class Document extends NextDocument {
     )
   }
 }
+
+export default MyDocument
