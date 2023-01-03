@@ -2,16 +2,30 @@ import { createStitches } from '@stitches/react'
 import type * as Stitches from '@stitches/react'
 export type { VariantProps } from '@stitches/react'
 
+const colors = {
+  white: '#fff',
+  black: '#000',
+  blue: '#5bcbfa',
+  green: '#4fad5b',
+  yellow: '#f8ce46',
+  orange: '#ee6f2d',
+  red: '#ea3223',
+}
+
 export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes, config, reset } =
   createStitches({
     theme: {
       colors: {
+        ...colors,
+
         primary: '#e32832',
         primaryTransparent: 'rgba(227, 40, 50, 0.1)',
         background: '#fff',
         text: '#111',
-        textSecondary: '#5f5f5f',
+        textSecondary: '#565656',
         textDisabled: '#757575',
+        panel: '#fff',
+        input: '#f5f5f5',
         border: 'rgba(0, 0, 0, 0.1)',
         hover: 'rgba(0, 0, 0, 0.05)',
         skeleton: 'rgba(0, 0, 0, 0.12)',
@@ -23,19 +37,20 @@ export const { styled, css, theme, createTheme, getCssText, globalCss, keyframes
       },
       sizes: {
         header: 'var(--header)',
-        footer: '64px',
       },
       space: {
-        gap: 'var(--gap)',
+        gutterX: 'var(--gutterX)',
       },
       radii: {
         pill: '9999px',
       },
     },
     media: {
+      xs: '(min-width: 0px)',
       sm: '(min-width: 600px)',
       md: '(min-width: 960px)',
       lg: '(min-width: 1280px)',
+      xl: '(min-width: 1440px)',
       touch: '(any-pointer: coarse)',
     },
     utils: {
@@ -101,6 +116,8 @@ export const darkTheme = createTheme('dark-theme', {
     text: '#fff',
     textSecondary: '#ccc',
     textDisabled: '#999',
+    panel: '#222',
+    input: '#181818',
     border: 'rgba(255, 255, 255, 0.1)',
     hover: 'rgba(255, 255, 255, 0.05)',
     skeleton: 'rgba(255, 255, 255, 0.12)',
