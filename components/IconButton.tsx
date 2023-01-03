@@ -9,6 +9,7 @@ const IconButton = styled('button', {
   border: 0,
   outline: 0,
   borderRadius: '50%',
+  flexShrink: 0,
   bg: 'transparent',
   color: '$textSecondary',
   fontSize: 24,
