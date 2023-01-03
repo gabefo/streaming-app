@@ -1,6 +1,7 @@
-import { RefObject, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import type { RefObject } from 'react'
 
-interface InViewOptions {
+type InViewOptions = {
   root?: RefObject<Element | Document>
   rootMargin?: string
   threshold?: number | number[]
