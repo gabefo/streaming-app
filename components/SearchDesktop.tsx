@@ -56,7 +56,7 @@ export default function SearchDesktop() {
               maxHeight: 350,
               borderRadius: 4,
               bg: '$panel',
-              boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
+              boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
             }}
           />
         )}
