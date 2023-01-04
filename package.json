@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@next/font": "13.0.7",
+    "@radix-ui/react-dialog": "^1.0.2",
     "@radix-ui/react-dismissable-layer": "^1.0.2",
     "@radix-ui/react-dropdown-menu": "^2.0.1",
     "@radix-ui/react-tooltip": "^1.0.2",
