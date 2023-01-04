@@ -8,6 +8,7 @@ import { darkTheme } from 'stitches.config'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItemIcon,
   DropdownMenuRadioGroup,
   DropdownMenuRadioItem,
   DropdownMenuSub,
@@ -15,7 +16,9 @@ import {
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from './DropdownMenu'
+import Flex from './Flex'
 import IconButton from './IconButton'
+import Text from './Text'
 
 type Theme = 'light' | 'dark' | 'system'
 
@@ -68,22 +71,38 @@ export default function Settings() {
           <Icon icon="mdi:dots-vertical" />
         </IconButton>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" css={{ width: 320 }}>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
-            {t('appearance')}: {t(`theme.${theme as Theme}`)}
+            <Flex css={{ gap: 16 }}>
+              <DropdownMenuItemIcon>
+                <Icon icon="mdi:brightness-6" />
+              </DropdownMenuItemIcon>
+              <Text>{t('theme')}</Text>
+              <Text color="secondary" css={{ ml: 'auto' }}>
+                {t(theme as Theme)}
+              </Text>
+            </Flex>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={theme} onValueChange={setTheme}>
-              <DropdownMenuRadioItem value="system">{t('theme.system')}</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="light">{t('theme.light')}</DropdownMenuRadioItem>
-              <DropdownMenuRadioItem value="dark">{t('theme.dark')}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="system">{t('system')}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="light">{t('light')}</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="dark">{t('dark')}</DropdownMenuRadioItem>
             </DropdownMenuRadioGroup>
           </DropdownMenuSubContent>
         </DropdownMenuSub>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>
-            {t('language')}: {languages.find(({ code }) => code === locale)?.name}
+            <Flex css={{ gap: 16 }}>
+              <DropdownMenuItemIcon>
+                <Icon icon="mdi:web" />
+              </DropdownMenuItemIcon>
+              <Text>{t('language')}</Text>
+              <Text color="secondary" css={{ ml: 'auto' }}>
+                {languages.find(({ code }) => code === locale)?.name}
+              </Text>
+            </Flex>
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={locale} onValueChange={handleLanguageChange}>
