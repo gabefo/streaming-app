@@ -5,15 +5,18 @@ const Text = styled('span', {
 
   variants: {
     variant: {
-      title: {
-        display: 'block',
-        fontSize: '1.125rem',
-        fontWeight: 600,
-        lineHeight: '1.5rem',
+      inherit: {
+        font: 'inherit',
       },
       body: {
         fontSize: '1rem',
         fontWeight: 400,
+        lineHeight: '1.5rem',
+      },
+      title: {
+        display: 'block',
+        fontSize: '1.125rem',
+        fontWeight: 600,
         lineHeight: '1.5rem',
       },
       caption: {
@@ -46,7 +49,7 @@ const Text = styled('span', {
   },
 
   defaultVariants: {
-    variant: 'body',
+    variant: 'inherit',
     color: 'inherit',
   },
 })
