@@ -78,22 +78,22 @@ export const getStaticProps: GetStaticProps<Props, Params> = async ({ params, lo
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return {
-      paths: [],
-      fallback: 'blocking',
-    }
-  }
-
+export const getStaticPaths: GetStaticPaths<Params> = async ({ locales }) => {
   const genres = await getGenreMovieList()
 
-  const paths = genres.flatMap((genre) =>
-    (locales as string[]).map((locale) => ({
-      params: { id: genre.id.toString() },
-      locale,
-    }))
-  )
-
-  return { paths, fallback: false }
+  return {
+    paths: locales
+      ? locales.flatMap((locale) =>
+          genres.map((genre) => ({
+            params: { id: genre.id.toString() },
+            locale,
+          }))
+        )
+      : genres.map((genre) => ({
+          params: {
+            id: genre.id.toString(),
+          },
+        })),
+    fallback: false,
+  }
 }
