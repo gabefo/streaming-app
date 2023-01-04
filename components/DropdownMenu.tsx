@@ -3,6 +3,7 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import React from 'react'
 import { css, styled } from 'stitches.config'
 import type { CSS } from 'stitches.config'
+import Grow from './Grow'
 
 export const DropdownMenu = DropdownMenuPrimitive.Root
 
@@ -38,9 +39,10 @@ const itemCss = css({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  height: 40,
-  pl: 16,
+  minHeight: 40,
+  py: 8,
   pr: 48,
+  pl: 16,
   fontSize: '1rem',
   fontWeight: 400,
   lineHeight: '1.5rem',
@@ -60,6 +62,12 @@ const itemCss = css({
 
 export const DropdownMenuItem = styled(DropdownMenuPrimitive.Item, itemCss)
 
+export const DropdownMenuItemIcon = styled('div', {
+  display: 'inline-flex',
+  fontSize: 24,
+  color: '$textSecondary',
+})
+
 export const DropdownMenuGroup = styled(DropdownMenuPrimitive.Group, {})
 
 const StyledDropdownMenuCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, itemCss, {
@@ -71,6 +79,7 @@ const StyledDropdownMenuCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem
 const StyledDropdownMenuItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
   mr: 16,
   fontSize: 24,
+  color: '$textSecondary',
   pointerEvents: 'none',
 })
 
@@ -88,7 +97,7 @@ export const DropdownMenuCheckboxItem = React.forwardRef<
       <StyledDropdownMenuItemIndicator>
         <Icon icon="mdi:check" />
       </StyledDropdownMenuItemIndicator>
-      {children}
+      <Grow>{children}</Grow>
     </StyledDropdownMenuCheckboxItem>
   )
 })
@@ -115,7 +124,7 @@ export const DropdownMenuRadioItem = React.forwardRef<
       <StyledDropdownMenuItemIndicator>
         <Icon icon="mdi:check" />
       </StyledDropdownMenuItemIndicator>
-      {children}
+      <Grow>{children}</Grow>
     </StyledDropdownMenuRadioItem>
   )
 })
@@ -135,9 +144,9 @@ const StyledDropdownMenuSubTrigger = styled(DropdownMenuPrimitive.SubTrigger, it
 })
 
 const RightSlot = styled('div', {
-  ml: 'auto',
-  pl: 8,
+  ml: 8,
   fontSize: 24,
+  color: '$textSecondary',
   pointerEvents: 'none',
 })
 
@@ -152,7 +161,7 @@ export const DropdownMenuSubTrigger = React.forwardRef<
 >(function DropdownMenuSubTrigger({ children, ...props }, forwardedRef) {
   return (
     <StyledDropdownMenuSubTrigger {...props} ref={forwardedRef}>
-      {children}
+      <Grow>{children}</Grow>
       <RightSlot>
         <Icon icon="mdi:chevron-right" />
       </RightSlot>
