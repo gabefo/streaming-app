@@ -13,6 +13,8 @@ const StyledLink = styled(Link, {
   height: 36,
   px: 16,
   color: 'inherit',
+  fontSize: '0.875rem',
+  lineHeight: '1.25rem',
   textDecoration: 'none',
 
   '&:hover': {
