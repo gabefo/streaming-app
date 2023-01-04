@@ -103,7 +103,7 @@ export default function MovieCard({ movie, ...props }: MovieCardProps) {
   const { id, title, poster_path, vote_average, release_date } = movie
 
   return (
-    <Link href={`/movies/${id}`} passHref legacyBehavior>
+    <Link href={`/movies/${id}`} passHref legacyBehavior prefetch={false}>
       <Card {...props}>
         <ImageContainer>
           {poster_path ? (
