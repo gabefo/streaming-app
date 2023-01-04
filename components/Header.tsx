@@ -5,7 +5,6 @@ import Grow from './Grow'
 import Logo from './Logo'
 import SearchDesktop from './SearchDesktop'
 import SearchMobile from './SearchMobile'
-import Settings from './Settings'
 
 const StyledHeader = styled('header', {
   position: 'fixed',
@@ -45,7 +44,6 @@ export default function Header() {
       {isDesktop && <SearchDesktop />}
       <Grow />
       {!isDesktop && <SearchMobile />}
-      <Settings />
     </StyledHeader>
   )
 }
