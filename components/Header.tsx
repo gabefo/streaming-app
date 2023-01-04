@@ -1,7 +1,7 @@
 import useMediaQuery from 'hooks/useMediaQuery'
 import useOffsetTop from 'hooks/useOffsetTop'
 import { styled } from 'stitches.config'
-import Box from './Box'
+import Grow from './Grow'
 import Logo from './Logo'
 import SearchDesktop from './SearchDesktop'
 import SearchMobile from './SearchMobile'
@@ -43,7 +43,7 @@ export default function Header() {
     <StyledHeader elevation={isOffset}>
       <Logo />
       {isDesktop && <SearchDesktop />}
-      <Box css={{ flexGrow: 1 }} />
+      <Grow />
       {!isDesktop && <SearchMobile />}
       <Settings />
     </StyledHeader>
