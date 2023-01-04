@@ -9,7 +9,7 @@ import Head from 'next/head'
 import type { ReactElement, ReactNode } from 'react'
 import { darkTheme, globalCss } from 'stitches.config'
 
-// https://api.iconify.design/mdi.js?icons=arrow-left,arrow-right,brightness-4,brightness-7,check,chevron-left,chevron-right,close,dots-vertical,github,linkedin,search,star&pretty=1&callback=addCollection
+// https://api.iconify.design/mdi.js?icons=arrow-left,arrow-right,brightness-6,check,chevron-left,chevron-right,close,dots-vertical,github,linkedin,search,star,web&pretty=1&callback=addCollection
 addCollection({
   prefix: 'mdi',
   icons: {
@@ -19,11 +19,8 @@ addCollection({
     'arrow-right': {
       body: '<path fill="currentColor" d="M4 11v2h12l-5.5 5.5l1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5L16 11H4Z"/>',
     },
-    'brightness-4': {
-      body: '<path fill="currentColor" d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6a6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69L8.69 4H4v4.69L.69 12L4 15.31V20h4.69L12 23.31L15.31 20H20v-4.69L23.31 12L20 8.69Z"/>',
-    },
-    'brightness-7': {
-      body: '<path fill="currentColor" d="M12 8a4 4 0 0 0-4 4a4 4 0 0 0 4 4a4 4 0 0 0 4-4a4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6a6 6 0 0 1 6-6a6 6 0 0 1 6 6a6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69L8.69 4H4v4.69L.69 12L4 15.31V20h4.69L12 23.31L15.31 20H20v-4.69L23.31 12L20 8.69Z"/>',
+    'brightness-6': {
+      body: '<path fill="currentColor" d="M12 18V6a6 6 0 0 1 6 6a6 6 0 0 1-6 6m8-2.69L23.31 12L20 8.69V4h-4.69L12 .69L8.69 4H4v4.69L.69 12L4 15.31V20h4.69L12 23.31L15.31 20H20v-4.69Z"/>',
     },
     check: {
       body: '<path fill="currentColor" d="M21 7L9 19l-5.5-5.5l1.41-1.41L9 16.17L19.59 5.59L21 7Z"/>',
