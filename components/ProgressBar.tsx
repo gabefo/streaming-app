@@ -84,7 +84,7 @@ export default function ProgressBar() {
   }
 
   return (
-    <RemoveScroll allowPinchZoom forwardProps>
+    <RemoveScroll removeScrollBar={false} allowPinchZoom forwardProps>
       <Overlay>
         <BarWrapper>
           <Bar animation="long" />
