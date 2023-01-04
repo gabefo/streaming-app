@@ -11,7 +11,7 @@ type MovieListProps = {
 export default function MovieGrid({ movies, loading }: MovieListProps) {
   return (
     <Grid columns={{ '@initial': 1, '@md': 2 }} css={{ mx: -8, rowGap: 8 }}>
-      {movies?.slice(0, 10).map((movie) => (
+      {movies?.map((movie) => (
         <MovieCard key={movie.id} movie={movie} direction="row" />
       ))}
       {loading ? Array.from(Array(20)).map((_, index) => <MovieSkeleton key={index} />) : null}
