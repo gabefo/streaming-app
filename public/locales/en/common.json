@@ -2,12 +2,10 @@
   "search": {
     "placeholder": "Search for movies & TV shows"
   },
-  "appearance": "Appearance",
-  "theme": {
-    "light": "Light",
-    "dark": "Dark",
-    "system": "Device theme"
-  },
+  "theme": "Theme",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
   "language": "Language",
   "movies": "Movies",
   "shows": "Shows",

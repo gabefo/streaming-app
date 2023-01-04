@@ -2,12 +2,10 @@
   "search": {
     "placeholder": "Rechercher des films et des séries TV"
   },
-  "appearance": "Apparence",
-  "theme": {
-    "light": "Thème clair",
-    "dark": "Thème foncé",
-    "system": "Thème de l'appareil"
-  },
+  "theme": "Thème",
+  "light": "Clair",
+  "dark": "Sombre",
+  "system": "Système",
   "language": "Langue",
   "movies": "Films",
   "shows": "Séries",

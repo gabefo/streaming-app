@@ -2,12 +2,10 @@
   "search": {
     "placeholder": "Nach Filmen und Serien suchen"
   },
-  "appearance": "Darstellung",
-  "theme": {
-    "light": "Hell",
-    "dark": "Dunkel",
-    "system": "Gerätedesign"
-  },
+  "theme": "Design",
+  "light": "Hell",
+  "dark": "Dunkel",
+  "system": "System",
   "language": "Sprache",
   "movies": "Filme",
   "shows": "Serien",
