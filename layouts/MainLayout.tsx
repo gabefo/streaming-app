@@ -4,6 +4,7 @@ import LoadingScreen from 'components/LoadingScreen'
 import { useEffect, useState } from 'react'
 import type { ReactNode } from 'react'
 import { styled } from 'stitches.config'
+import { useRouter } from 'next/router'
 
 const Root = styled('div', {
   display: 'flex',
@@ -22,13 +23,15 @@ type LayoutProps = {
 }
 
 export default function MainLayout({ children }: LayoutProps) {
-  const [isLoading, setIsLoading] = useState(true)
+  const { isFallback } = useRouter()
+
+  const [isLoading, setLoading] = useState(true)
 
   useEffect(() => {
-    setIsLoading(false)
+    setLoading(false)
   }, [])
 
-  if (isLoading) {
+  if (isLoading || isFallback) {
     return <LoadingScreen />
   }
 
