@@ -24,6 +24,7 @@ const SelectTrigger = styled(SelectPrimitive.Trigger, {
   fontWeight: 400,
   lineHeight: '1.5rem',
   textDecoration: 'none',
+  whiteSpace: 'nowrap',
   cursor: 'pointer',
   userSelect: 'none',
 
