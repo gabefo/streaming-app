@@ -10,31 +10,34 @@ const Root = styled('div', {
 })
 
 const pulse = keyframes({
-  '0%': { transform: 'scale(0.5)', opacity: 0.2 },
-  '25%': { transform: 'scale(1)', opacity: 1 },
-  '50%': { transform: 'scale(0.5)', opacity: 0.2 },
+  '0%': { transform: 'scale(1)', opacity: 1 },
+  '45%': { transform: 'scale(0.5)', opacity: 0.2 },
+  '80%': { transform: 'scale(1)', opacity: 1 },
 })
 
 const Circle = styled('span', {
   display: 'inline-block',
+  m: 2,
   width: 16,
   height: 16,
   borderRadius: '50%',
   bg: '$primary',
-  transform: 'scale(0.5)',
-  opacity: 0.2,
   animationName: `${pulse}`,
-  animationDuration: '1.2s',
-  animationTimingFunction: 'linear',
+  animationDuration: '1s',
+  animationTimingFunction: 'cubic-bezier(0.2, 0.68, 0.18, 1.08)',
   animationIterationCount: 'infinite',
+  animationFillMode: 'both',
 
   variants: {
     order: {
       1: {
-        animationDelay: '0.3s',
+        animationDelay: '0.16s',
       },
       2: {
-        animationDelay: '0.6s',
+        animationDelay: '0.32s',
+      },
+      3: {
+        animationDelay: '0.48s',
       },
     },
   },
@@ -44,9 +47,9 @@ export default function LoadingScreen() {
   return (
     <Root>
       <Box>
-        <Circle />
         <Circle order={1} />
         <Circle order={2} />
+        <Circle order={3} />
       </Box>
     </Root>
   )
