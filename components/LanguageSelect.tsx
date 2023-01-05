@@ -5,12 +5,15 @@ import { useMemo } from 'react'
 import { styled } from 'stitches.config'
 import { Select, SelectItem } from './Select'
 
-const Flag = styled(Image, {
+const Flag = styled('div', {
+  display: 'inline-flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   mr: 12,
   width: 24,
   height: 24,
   borderRadius: '50%',
-  objectFit: 'cover',
+  overflow: 'hidden',
 })
 
 export default function LanguageSelect() {
@@ -47,7 +50,9 @@ export default function LanguageSelect() {
     <Select defaultValue={locale} onValueChange={handleValueChange}>
       {languages.map(({ code, name }) => (
         <SelectItem key={code} value={code}>
-          <Flag src={`/images/flags/${code}.png`} alt={name} width={32} height={24} />
+          <Flag>
+            <Image src={`/images/flags/${code}.png`} alt={name} width={32} height={24} />
+          </Flag>
           {name}
         </SelectItem>
       ))}
