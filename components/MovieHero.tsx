@@ -7,11 +7,14 @@ import Container from './Container'
 import Flex from './Flex'
 import Text from './Text'
 import formatDuration from 'lib/formatDuration'
+import MovieTrailer from './MovieTrailer'
+import getCertificationColor from 'lib/tmdb/getCertificationColor'
 
 const Root = styled('div', {
   position: 'relative',
   display: 'flex',
   minHeight: '56.25vw',
+  pb: 16,
   bg: '#111',
   color: '#fff',
 
@@ -60,16 +63,6 @@ const Gradient = styled('div', {
     backgroundImage:
       'linear-gradient(to right, #111 0, rgba(0, 0, 0, 0) 56%), linear-gradient(to top, #111 0, rgba(0, 0, 0, 0) 56%), linear-gradient(to left, #111 0, rgba(0, 0, 0, 0) 56%)',
   },
-})
-
-const Content = styled('div', {
-  position: 'relative',
-  display: 'flex',
-  flexDirection: 'column',
-  justifyContent: 'flex-end',
-  maxWidth: 720,
-  height: '100%',
-  pb: 16,
 })
 
 const Header = styled('div', {
@@ -133,42 +126,24 @@ const Certification = styled('span', {
   color: '#fff',
 
   variants: {
-    variant: {
-      L: {
+    color: {
+      green: {
         bg: '$green',
-        '&::before': {
-          content: 'L',
-        },
       },
-      10: {
+      blue: {
         bg: '$blue',
-        '&::before': {
-          content: '10',
-        },
       },
-      12: {
+      yellow: {
         bg: '$yellow',
-        '&::before': {
-          content: '12',
-        },
       },
-      14: {
+      orange: {
         bg: '$orange',
-        '&::before': {
-          content: '14',
-        },
       },
-      16: {
+      red: {
         bg: '$red',
-        '&::before': {
-          content: '16',
-        },
       },
-      18: {
+      black: {
         bg: '#000',
-        '&::before': {
-          content: '18',
-        },
       },
     },
   },
@@ -182,6 +157,7 @@ export default function MovieHero({ movie }: MovieHeroProps) {
   const { t } = useTranslation('common')
 
   const {
+    id,
     backdrop_path,
     cast,
     certification,
@@ -224,39 +200,46 @@ export default function MovieHero({ movie }: MovieHeroProps) {
             <Gradient />
           </Cover>
         )}
-        <Content>
-          <Header>
-            {poster_path && (
-              <Poster
-                key={poster_path}
-                alt={title}
-                src={buildImageURL(poster_path, 'w154')}
-                width={154}
-                height={231}
-              />
+        <Flex direction="column" justify="end" css={{ height: '100%' }}>
+          <Flex direction="column" css={{ maxWidth: 720 }}>
+            <Header>
+              {poster_path && (
+                <Poster
+                  key={poster_path}
+                  alt={title}
+                  src={buildImageURL(poster_path, 'w154')}
+                  width={154}
+                  height={231}
+                />
+              )}
+              <Flex direction="column">
+                <Title>{title}</Title>
+                <div>
+                  {certification && (
+                    <Certification color={getCertificationColor(certification)}>
+                      {certification}
+                    </Certification>
+                  )}
+                  <Text variant="caption" css={{ color: '#aaa' }}>
+                    {facts.join(' • ')}
+                  </Text>
+                </div>
+              </Flex>
+            </Header>
+            {overview ? <Text gutterBottom>{overview}</Text> : null}
+            {cast.length > 0 ? (
+              <Text gutterBottom>
+                <b>{t('starring')}</b> {cast.map((person) => person.name).join(' • ')}
+              </Text>
+            ) : null}
+            {director && (
+              <Text gutterBottom>
+                <b>{t('directed-by')}</b> {director.name}
+              </Text>
             )}
-            <Flex direction="column">
-              <Title>{title}</Title>
-              <div>
-                {certification && <Certification variant={certification} />}
-                <Text variant="caption" css={{ color: '#aaa' }}>
-                  {facts.join(' • ')}
-                </Text>
-              </div>
-            </Flex>
-          </Header>
-          {overview ? <Text gutterBottom>{overview}</Text> : null}
-          {cast.length > 0 ? (
-            <Text gutterBottom>
-              <b>{t('starring')}</b> {cast.map((person) => person.name).join(' • ')}
-            </Text>
-          ) : null}
-          {director && (
-            <Text gutterBottom>
-              <b>{t('directed-by')}</b> {director.name}
-            </Text>
-          )}
-        </Content>
+          </Flex>
+          <MovieTrailer movieId={id} />
+        </Flex>
       </Container>
     </Root>
   )
