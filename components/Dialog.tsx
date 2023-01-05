@@ -20,38 +20,39 @@ const fadeOut = keyframes({
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   position: 'fixed',
   inset: 0,
-  bg: '$overlay',
+  bg: 'rgba(0, 0, 0, 0.8)',
   willChange: 'opacity',
 
   '&[data-state="open"]': {
-    animation: `${fadeIn} 0.2s ease-out`,
+    animation: `${fadeIn} 0.1s`,
   },
 
   '&[data-state="closed"]': {
-    animation: `${fadeOut} 0.2s ease-in`,
+    animation: `${fadeOut} 0.1s`,
   },
 })
 
 const StyledContent = styled(DialogPrimitive.Content, {
   position: 'fixed',
-  display: 'flex',
-  flexDirection: 'column',
+  top: 0,
+  left: 0,
+  bottom: 0,
+  right: 0,
   bg: '$panel',
   color: '$text',
+  overflow: 'auto',
 
   '&:focus': {
     outline: 'none',
   },
 
-  variants: {
-    fullscreen: {
-      true: {
-        top: 0,
-        left: 0,
-        bottom: 0,
-        right: 0,
-      },
-    },
+  '@md': {
+    top: '50%',
+    left: '50%',
+    bottom: 'auto',
+    right: 'auto',
+    borderRadius: 8,
+    transform: 'translate(-50%, -50%)',
   },
 })
 
