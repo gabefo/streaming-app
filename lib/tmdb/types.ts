@@ -200,6 +200,19 @@ export type PersonDetails = Omit<Person, 'known_for'> & {
 
 export type PersonWithMediaType = Person & { media_type: 'person' }
 
+export type Video = {
+  id: string
+  iso_639_1: string
+  iso_3166_1: string
+  key: string
+  name: string
+  official: boolean
+  published_at: string
+  site: string
+  size: number
+  type: string
+}
+
 export interface List extends Data {
   page: number
   total_pages: number
@@ -208,6 +221,11 @@ export interface List extends Data {
 
 export interface MovieList extends List {
   results: Movie[]
+}
+
+export interface MovieVideos extends Data {
+  id: number
+  results: Video[]
 }
 
 export interface TVList extends List {
