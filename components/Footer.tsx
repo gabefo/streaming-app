@@ -38,8 +38,8 @@ export default function Footer() {
         <Divider />
         <Flex
           direction={{ '@initial': 'column', '@md': 'row' }}
-          align="start"
-          justify="between"
+          align={{ '@initial': 'stretch', '@md': 'start' }}
+          justify={{ '@initial': 'start', '@md': 'between' }}
           css={{ gap: 24 }}
         >
           <Flex
@@ -77,7 +77,7 @@ export default function Footer() {
             <StyledLink href="/terms-of-service">Terms of Service</StyledLink>
             <StyledLink href="/privacy">Privacy</StyledLink>
           </Flex>
-          <Flex css={{ gap: 8 }}>
+          <Flex justify="end" css={{ gap: 8 }}>
             <LanguageSelect />
             <ThemeSelect />
           </Flex>
