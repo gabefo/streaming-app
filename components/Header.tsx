@@ -14,14 +14,14 @@ const StyledHeader = styled('header', {
   width: '100%',
   height: '$header',
   pl: 16,
-  pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 8px)',
+  pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 4px)',
   bg: '$background',
   zIndex: 1,
   transition: 'box-shadow 0.2s ease-in-out',
 
   '@md': {
     pl: 24,
-    pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 16px)',
+    pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 12px)',
   },
 
   variants: {
