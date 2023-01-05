@@ -17,9 +17,9 @@ const pulse = keyframes({
 
 const Circle = styled('span', {
   display: 'inline-block',
-  m: 2,
-  width: 16,
-  height: 16,
+  m: 4,
+  width: 12,
+  height: 12,
   borderRadius: '50%',
   bg: '$primary',
   animationName: `${pulse}`,
