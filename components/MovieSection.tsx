@@ -32,7 +32,7 @@ export default function MovieSection({ genre }: SectionProps) {
 
   const { data } = useSWRImmutable<MovieList, Error>(
     isInView
-      ? `/api/tmdb/discover/movie?&language=${locale}&sort_by=popularity.desc&page=1&with_genres=${genre.id}`
+      ? `/api/tmdb/discover/movie?language=${locale}&sort_by=popularity.desc&page=1&with_genres=${genre.id}`
       : null,
     fetcher
   )

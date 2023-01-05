@@ -12,7 +12,7 @@ export default function SimilarMovies({ movieId }: SimilarMoviesProps) {
   const { locale } = useRouter()
 
   const { data, error } = useSWRImmutable<MovieList, Error>(
-    `/api/tmdb/movie/${movieId}/similar?&language=${locale}`,
+    `/api/tmdb/movie/${movieId}/similar?language=${locale}`,
     fetcher
   )
 
