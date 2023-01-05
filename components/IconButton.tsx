@@ -11,7 +11,6 @@ const IconButton = styled('button', {
   borderRadius: '50%',
   flexShrink: 0,
   bg: 'transparent',
-  color: '$textSecondary',
   fontSize: 24,
   fontWeight: 400,
   lineHeight: 1,
@@ -25,6 +24,18 @@ const IconButton = styled('button', {
   },
 
   variants: {
+    color: {
+      default: {
+        color: '$textSecondary',
+      },
+      white: {
+        color: 'rgba(255, 255, 255, 0.9)',
+
+        '&:hover': {
+          color: '#fff',
+        },
+      },
+    },
     size: {
       small: {
         width: 32,
@@ -51,6 +62,7 @@ const IconButton = styled('button', {
 
   defaultVariants: {
     size: 'medium',
+    color: 'default',
   },
 })
 
