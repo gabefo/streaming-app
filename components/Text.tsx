@@ -24,6 +24,12 @@ const Text = styled('span', {
         fontWeight: 400,
         lineHeight: '1.25rem',
       },
+      overline: {
+        fontSize: '0.875rem',
+        fontWeight: 600,
+        lineHeight: '1.25rem',
+        textTransform: 'uppercase',
+      },
     },
 
     color: {
@@ -38,6 +44,18 @@ const Text = styled('span', {
       },
       disabled: {
         color: '$textDisabled',
+      },
+    },
+
+    align: {
+      left: {
+        textAlign: 'left',
+      },
+      center: {
+        textAlign: 'center',
+      },
+      right: {
+        textAlign: 'right',
       },
     },
 
