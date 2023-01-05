@@ -1,6 +1,7 @@
 import { styled } from 'stitches.config'
 
 const Flex = styled('div', {
+  position: 'relative',
   display: 'flex',
 
   variants: {
