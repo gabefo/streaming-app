@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { styled } from 'stitches.config'
 import type { CSS, VariantProps } from 'stitches.config'
 import Text from './Text'
+import Box from './Box'
 
 const ImageContainer = styled('div', {
   position: 'relative',
@@ -115,7 +116,7 @@ export default function MovieCard({ movie, ...props }: MovieCardProps) {
             />
           ) : null}
         </ImageContainer>
-        <div>
+        <Box css={{ minHeight: 64 }}>
           <Title>{title}</Title>
           <Description>
             <Rating>
@@ -126,7 +127,7 @@ export default function MovieCard({ movie, ...props }: MovieCardProps) {
               {release_date.slice(0, 4)}
             </Text>
           </Description>
-        </div>
+        </Box>
       </Card>
     </Link>
   )
