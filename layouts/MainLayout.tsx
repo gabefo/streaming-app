@@ -14,7 +14,6 @@ const Root = styled('div', {
 
 const Content = styled('div', {
   pt: '$sizes$header',
-  pb: 24,
   flexGrow: 1,
 })
 
