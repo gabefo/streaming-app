@@ -1,8 +1,6 @@
 import Container from 'components/Container'
-import LoadingIndicator from 'components/LoadingIndicator'
 import Text from 'components/Text'
 import TitleAndMetaTags from 'components/TitleAndMetaTags'
-import useInView from 'hooks/useInView'
 import MainLayout from 'layouts/MainLayout'
 import fetcher from 'lib/fetcher'
 import { getGenreMovieList } from 'lib/tmdb/api'
@@ -11,10 +9,10 @@ import type { GetStaticPaths, GetStaticProps } from 'next'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useRouter } from 'next/router'
 import type { NextPageWithLayout } from 'pages/_app'
-import { createRef, useEffect } from 'react'
-import type { ReactElement } from 'react'
+import { ReactElement, useCallback } from 'react'
 import useSWRInfinite from 'swr/infinite'
 import MovieGrid from 'components/MovieGrid'
+import LoadMore from 'components/LoadMore'
 
 type Props = {
   genre: Genre
@@ -31,19 +29,13 @@ const Page: NextPageWithLayout<Props> = ({ genre }) => {
     fetcher
   )
 
-  const movies = data ? data.map(({ results }) => results).flat() : []
+  const movies = data ? data.flatMap(({ results }) => results) : []
   const isLoadingInitialData = !data && !error
   const hasMore = data && data[data.length - 1].total_pages > size + 1
 
-  const ref = createRef<HTMLSpanElement>()
-
-  const isInView = useInView(ref)
-
-  useEffect(() => {
-    if (isInView) {
-      setSize((prevSize) => prevSize + 1)
-    }
-  }, [isInView, setSize])
+  const handleLoadMore = useCallback(() => {
+    setSize((prevSize) => prevSize + 1)
+  }, [setSize])
 
   return (
     <>
@@ -53,7 +45,7 @@ const Page: NextPageWithLayout<Props> = ({ genre }) => {
           {genre.name}
         </Text>
         <MovieGrid movies={movies} loading={isLoadingInitialData} />
-        {hasMore && <LoadingIndicator ref={ref} />}
+        {hasMore && <LoadMore onLoadMore={handleLoadMore} />}
       </Container>
     </>
   )
