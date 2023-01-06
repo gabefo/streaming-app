@@ -36,7 +36,7 @@ const Content = styled('div', {
 
 const Button = styled('button', {
   position: 'absolute',
-  top: 'calc(50% - 44px)',
+  top: 'calc(50% - 56px)',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',

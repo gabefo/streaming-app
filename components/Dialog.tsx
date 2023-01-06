@@ -40,6 +40,7 @@ const StyledContent = styled(DialogPrimitive.Content, {
   right: 0,
   bg: '$panel',
   color: '$text',
+  boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
   overflow: 'auto',
 
   '&:focus': {

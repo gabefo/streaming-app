@@ -1,6 +1,7 @@
 import { Icon } from '@iconify/react'
 import fetcher from 'lib/fetcher'
 import type { MovieVideos } from 'lib/tmdb/types'
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { styled } from 'stitches.config'
 import useSWRImmutable from 'swr/immutable'
@@ -76,6 +77,8 @@ type MovieTrailerProps = {
 export default function MovieTrailer({ movieId }: MovieTrailerProps) {
   const { locale } = useRouter()
 
+  const { t } = useTranslation()
+
   const { data } = useSWRImmutable<MovieVideos, Error>(
     `/api/tmdb/movie/${movieId}/videos?language=${locale}`,
     fetcher
@@ -95,7 +98,7 @@ export default function MovieTrailer({ movieId }: MovieTrailerProps) {
         <DialogTrigger asChild>
           <Button>
             <Icon icon="mdi:play-outline" fontSize={24} />
-            Trailer
+            {t('trailer')}
           </Button>
         </DialogTrigger>
       </ButtonContainer>

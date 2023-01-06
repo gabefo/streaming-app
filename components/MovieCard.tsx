@@ -10,7 +10,6 @@ import Box from './Box'
 
 const ImageContainer = styled('div', {
   position: 'relative',
-  flexShrink: 0,
   aspectRatio: '3 / 4',
   borderRadius: 8,
   boxShadow: '0 2px 4px 0 rgb(0, 0, 0, 0.2)',
@@ -51,8 +50,7 @@ const Rating = styled('div', {
 
 const Card = styled('a', {
   position: 'relative',
-  display: 'flex',
-  height: '100%',
+  display: 'grid',
   p: 8,
   rowGap: 8,
   columnGap: 16,
@@ -69,14 +67,10 @@ const Card = styled('a', {
   variants: {
     direction: {
       row: {
-        flexDirection: 'row',
+        gridTemplateColumns: '72px auto',
 
-        [`& ${ImageContainer}`]: {
-          width: 72,
-
-          '@sm': {
-            width: 96,
-          },
+        '@sm': {
+          gridTemplateColumns: '96px auto',
         },
 
         [`& ${Description}`]: {
@@ -85,7 +79,7 @@ const Card = styled('a', {
         },
       },
       column: {
-        flexDirection: 'column',
+        gridTemplateRows: 'auto auto',
       },
     },
   },
