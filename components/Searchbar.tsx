@@ -390,13 +390,13 @@ export default function Searchbar({ detached = false, ...props }: SearchbarProps
             }}
           >
             <Chip selected={state.context.filter === 'movie'} onClick={() => setFilter('movie')}>
-              Movies
+              {t('movies')}
             </Chip>
             <Chip selected={state.context.filter === 'tv'} onClick={() => setFilter('tv')}>
-              Shows
+              {t('shows')}
             </Chip>
             <Chip selected={state.context.filter === 'person'} onClick={() => setFilter('person')}>
-              People
+              {t('people')}
             </Chip>
           </Flex>
           {state.status === 'idle' ? (
