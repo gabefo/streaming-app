@@ -220,7 +220,7 @@ export default function MovieDetailsHero({ movie }: MovieHeroProps) {
               ) : null}
               <Flex direction="column">
                 <Title>{title}</Title>
-                <div>
+                <Flex align="center">
                   {certification ? (
                     <Certification color={getCertificationColor(certification)}>
                       {certification}
@@ -229,7 +229,7 @@ export default function MovieDetailsHero({ movie }: MovieHeroProps) {
                   <Text variant="caption" css={{ color: '#aaa' }}>
                     {facts.join(' • ')}
                   </Text>
-                </div>
+                </Flex>
               </Flex>
             </Header>
             {overview ? <Text gutterBottom>{overview}</Text> : null}
