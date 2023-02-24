@@ -9,9 +9,5 @@
   "language": "Language",
   "movies": "Movies",
   "shows": "Shows",
-  "people": "People",
-  "trailer": "Trailer",
-  "starring": "Starring",
-  "directed-by": "Directed by",
-  "similar-movies": "Similar movies"
+  "people": "People"
 }

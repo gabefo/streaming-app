@@ -1,23 +1,47 @@
+import React from 'react'
+
 import { Icon } from '@iconify/react'
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
-import React from 'react'
-import { css, styled } from 'stitches.config'
+
+import { css, keyframes, styled } from 'stitches.config'
+
 import type { CSS } from 'stitches.config'
-import Grow from './Grow'
 
 export const DropdownMenu = DropdownMenuPrimitive.Root
 
 export const DropdownMenuTrigger = DropdownMenuPrimitive.Trigger
 
-const contentCss = css({
-  minWidth: 180,
+const ZoomIn = keyframes({
+  '0%': { opacity: 0, transform: 'scale(0.9)' },
+  '30%': { opacity: 1 },
+  '100%': { transform: 'scale(1)' },
+})
+
+const fadeOut = keyframes({
+  from: { opacity: 1 },
+  to: { opacity: 0 },
+})
+
+const StyledContent = styled(DropdownMenuPrimitive.Content, {
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
   py: 8,
   borderRadius: 4,
   bg: '$panel',
-  boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
-})
+  boxShadow: '$8',
+  overflow: 'hidden',
+  transformOrigin: 'var(--radix-dropdown-menu-content-transform-origin)',
+  willChange: 'transform, opacity',
 
-const StyledContent = styled(DropdownMenuPrimitive.Content, contentCss)
+  '&[data-state="open"]': {
+    animation: `${ZoomIn} 0.15s cubic-bezier(0.4, 0, 0.2, 1)`,
+  },
+
+  '&[data-state="closed"]': {
+    animation: `${fadeOut} 0.15s linear`,
+  },
+})
 
 type DropdownMenuContentPrimitiveProps = React.ComponentProps<typeof DropdownMenuPrimitive.Content>
 type DropdownMenuContentProps = DropdownMenuContentPrimitiveProps & { css?: CSS }
@@ -25,13 +49,13 @@ type DropdownMenuContentProps = DropdownMenuContentPrimitiveProps & { css?: CSS 
 export const DropdownMenuContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   DropdownMenuContentProps
->(function DrodpwonMenuContent(props, forwardedRef) {
-  return (
-    <DropdownMenuPrimitive.Portal>
-      <StyledContent sideOffset={8} collisionPadding={12} {...props} ref={forwardedRef} />
-    </DropdownMenuPrimitive.Portal>
-  )
-})
+>(({ children, ...props }, forwardedRef) => (
+  <DropdownMenuPrimitive.Portal>
+    <StyledContent align="start" {...props} ref={forwardedRef}>
+      {children}
+    </StyledContent>
+  </DropdownMenuPrimitive.Portal>
+))
 
 export const DropdownMenuLabel = styled(DropdownMenuPrimitive.Label, {})
 
@@ -39,48 +63,41 @@ const itemCss = css({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  minHeight: 40,
-  py: 8,
-  pr: 48,
-  pl: 16,
+  height: 40,
+  px: 24,
+  outline: 0,
   fontSize: '1rem',
   fontWeight: 400,
   lineHeight: '1.5rem',
   color: '$text',
   userSelect: 'none',
-  outline: 'none',
   cursor: 'pointer',
+  transition: 'background-color 0.2s ease-in-out',
 
   '&[data-disabled]': {
+    color: '$textDisabled',
     pointerEvents: 'none',
   },
 
-  '&[data-highlighted]': {
+  '&[data-highlighted], &[data-state="checked"]': {
     bg: '$hover',
   },
 })
 
 export const DropdownMenuItem = styled(DropdownMenuPrimitive.Item, itemCss)
 
-export const DropdownMenuItemIcon = styled('div', {
-  display: 'inline-flex',
-  fontSize: 24,
-  color: '$textSecondary',
-})
-
 export const DropdownMenuGroup = styled(DropdownMenuPrimitive.Group, {})
 
-const StyledDropdownMenuCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, itemCss, {
-  '&[data-state="unchecked"]': {
-    pl: 56,
-  },
+const StyledCheckboxItem = styled(DropdownMenuPrimitive.CheckboxItem, itemCss, {
+  pl: 48,
 })
 
-const StyledDropdownMenuItemIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
-  mr: 16,
+const StyledIndicator = styled(DropdownMenuPrimitive.ItemIndicator, {
+  position: 'absolute',
+  top: 'calc(50% - 12px)',
+  left: 12,
   fontSize: 24,
   color: '$textSecondary',
-  pointerEvents: 'none',
 })
 
 type DropdownMenuCheckboxItemPrimitiveProps = React.ComponentProps<
@@ -89,100 +106,21 @@ type DropdownMenuCheckboxItemPrimitiveProps = React.ComponentProps<
 type DropdownMenuCheckboxItemProps = DropdownMenuCheckboxItemPrimitiveProps & { css?: CSS }
 
 export const DropdownMenuCheckboxItem = React.forwardRef<
-  React.ElementRef<typeof StyledDropdownMenuCheckboxItem>,
+  React.ElementRef<typeof StyledCheckboxItem>,
   DropdownMenuCheckboxItemProps
->(function DropdownMenuCheckboxItem({ children, ...props }, forwardedRef) {
-  return (
-    <StyledDropdownMenuCheckboxItem {...props} ref={forwardedRef}>
-      <StyledDropdownMenuItemIndicator>
-        <Icon icon="mdi:check" />
-      </StyledDropdownMenuItemIndicator>
-      <Grow>{children}</Grow>
-    </StyledDropdownMenuCheckboxItem>
-  )
-})
+>(({ children, ...props }, forwardedRef) => (
+  <StyledCheckboxItem {...props} ref={forwardedRef}>
+    <StyledIndicator>
+      <Icon icon="mdi:check" />
+    </StyledIndicator>
+    {children}
+  </StyledCheckboxItem>
+))
 
 export const DropdownMenuRadioGroup = styled(DropdownMenuPrimitive.RadioGroup, {})
 
-const StyledDropdownMenuRadioItem = styled(DropdownMenuPrimitive.RadioItem, itemCss, {
-  '&[data-state="unchecked"]': {
-    pl: 56,
-  },
-})
-
-type DropdownMenuRadioItemPrimitiveProps = React.ComponentProps<
-  typeof DropdownMenuPrimitive.RadioItem
->
-type DropdownMenuRadioItemProps = DropdownMenuRadioItemPrimitiveProps & { css?: CSS }
-
-export const DropdownMenuRadioItem = React.forwardRef<
-  React.ElementRef<typeof StyledDropdownMenuRadioItem>,
-  DropdownMenuRadioItemProps
->(function DropdownMenuRadioItem({ children, ...props }, forwardedRef) {
-  return (
-    <StyledDropdownMenuRadioItem {...props} ref={forwardedRef}>
-      <StyledDropdownMenuItemIndicator>
-        <Icon icon="mdi:check" />
-      </StyledDropdownMenuItemIndicator>
-      <Grow>{children}</Grow>
-    </StyledDropdownMenuRadioItem>
-  )
-})
+export const DropdownMenuRadioItem = styled(DropdownMenuPrimitive.RadioItem, itemCss)
 
 export const DropdownMenuSeparator = styled(DropdownMenuPrimitive.Separator, {
   borderBottom: '1px solid $hover',
-})
-
-export const DropdownMenuSub = DropdownMenuPrimitive.Sub
-
-const StyledDropdownMenuSubTrigger = styled(DropdownMenuPrimitive.SubTrigger, itemCss, {
-  pr: 16,
-
-  '&[data-state="open"]': {
-    bg: '$hover',
-  },
-})
-
-const RightSlot = styled('div', {
-  ml: 8,
-  fontSize: 24,
-  color: '$textSecondary',
-  pointerEvents: 'none',
-})
-
-type DropdownMenuSubTriggerPrimitiveProps = React.ComponentProps<
-  typeof DropdownMenuPrimitive.SubTrigger
->
-type DropdownMenuSubTriggerProps = DropdownMenuSubTriggerPrimitiveProps & { css?: CSS }
-
-export const DropdownMenuSubTrigger = React.forwardRef<
-  React.ElementRef<typeof StyledDropdownMenuSubTrigger>,
-  DropdownMenuSubTriggerProps
->(function DropdownMenuSubTrigger({ children, ...props }, forwardedRef) {
-  return (
-    <StyledDropdownMenuSubTrigger {...props} ref={forwardedRef}>
-      <Grow>{children}</Grow>
-      <RightSlot>
-        <Icon icon="mdi:chevron-right" />
-      </RightSlot>
-    </StyledDropdownMenuSubTrigger>
-  )
-})
-
-const StyledSubContent = styled(DropdownMenuPrimitive.SubContent, contentCss)
-
-type DropdownMenuSubContentPrimitiveProps = React.ComponentProps<
-  typeof DropdownMenuPrimitive.SubContent
->
-type DropdownMenuSubContentProps = DropdownMenuSubContentPrimitiveProps & { css?: CSS }
-
-export const DropdownMenuSubContent = React.forwardRef<
-  React.ElementRef<typeof StyledSubContent>,
-  DropdownMenuSubContentProps
->(function DropdownMenuSubContent(props, forwardedRef) {
-  return (
-    <DropdownMenuPrimitive.Portal>
-      <StyledSubContent collisionPadding={12} {...props} ref={forwardedRef} />
-    </DropdownMenuPrimitive.Portal>
-  )
 })

@@ -1,0 +1,42 @@
+import { MovieGenre, TVGenre } from './types'
+
+export const movieGenres = [
+  { id: MovieGenre.ACTION, name: 'Action' },
+  { id: MovieGenre.ADVENTURE, name: 'Adventure' },
+  { id: MovieGenre.ANIMATION, name: 'Animation' },
+  { id: MovieGenre.COMEDY, name: 'Comedy' },
+  { id: MovieGenre.CRIME, name: 'Crime' },
+  { id: MovieGenre.DOCUMENTARY, name: 'Documentary' },
+  { id: MovieGenre.DRAMA, name: 'Drama' },
+  { id: MovieGenre.FAMILY, name: 'Family' },
+  { id: MovieGenre.FANTASY, name: 'Fantasy' },
+  { id: MovieGenre.HISTORY, name: 'History' },
+  { id: MovieGenre.HORROR, name: 'Horror' },
+  { id: MovieGenre.MUSIC, name: 'Music' },
+  { id: MovieGenre.MYSTERY, name: 'Mystery' },
+  { id: MovieGenre.ROMANCE, name: 'Romance' },
+  { id: MovieGenre.SCI_FI, name: 'Sci-Fi' },
+  { id: MovieGenre.TV_MOVIE, name: 'TV movie' },
+  { id: MovieGenre.THRILLER, name: 'Thriller' },
+  { id: MovieGenre.WAR, name: 'War' },
+  { id: MovieGenre.WESTERN, name: 'Western' },
+]
+
+export const tvGenres = [
+  { id: TVGenre.ACTION_AND_ADVENTURE, name: 'Action & Adventure' },
+  { id: TVGenre.ANIMATION, name: 'Animation' },
+  { id: TVGenre.COMEDY, name: 'Comedy' },
+  { id: TVGenre.CRIME, name: 'Crime' },
+  { id: TVGenre.DOCUMENTARY, name: 'Documentary' },
+  { id: TVGenre.DRAMA, name: 'Drama' },
+  { id: TVGenre.FAMILY, name: 'Family' },
+  { id: TVGenre.KIDS, name: 'Kids' },
+  { id: TVGenre.MYSTERY, name: 'Mystery' },
+  { id: TVGenre.NEWS, name: 'News' },
+  { id: TVGenre.REALITY, name: 'Reality' },
+  { id: TVGenre.SCI_FI_AND_FANTASY, name: 'Sci-Fi & Fantasy' },
+  { id: TVGenre.SOAP, name: 'Soap' },
+  { id: TVGenre.TALK, name: 'Talk' },
+  { id: TVGenre.WAR_AND_POLITICS, name: 'War & Politics' },
+  { id: TVGenre.WESTERN, name: 'Western' },
+]

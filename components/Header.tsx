@@ -1,49 +1,57 @@
-import useMediaQuery from 'hooks/useMediaQuery'
-import useOffsetTop from 'hooks/useOffsetTop'
-import { styled } from 'stitches.config'
-import Grow from './Grow'
-import Logo from './Logo'
-import SearchDesktop from './SearchDesktop'
-import SearchMobile from './SearchMobile'
+import { useMediaQuery } from 'react-responsive'
 
-const StyledHeader = styled('header', {
+import { styled } from 'stitches.config'
+
+import Container from './Container'
+import Logo from './Logo'
+import Navbar from './Navbar'
+import Searchbar from './Searchbar'
+import Settings from './settings'
+
+const Root = styled('header', {
   position: 'fixed',
   top: 0,
+  left: 0,
+  width: '100%',
+  pr: 'var(--removed-body-scroll-bar-size, 0px)',
+  bg: '$background',
+  zIndex: 3,
+})
+
+const Row = styled('div', {
   display: 'flex',
   alignItems: 'center',
-  width: '100%',
-  height: '$header',
-  pl: 16,
-  pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 4px)',
-  bg: '$background',
-  zIndex: 1,
-  transition: 'box-shadow 0.2s ease-in-out',
+  height: 56,
+  pl: 24,
+  pr: 12,
+  gap: 16,
 
   '@md': {
-    pl: 24,
-    pr: 'calc(var(--removed-body-scroll-bar-size, 0px) + 12px)',
-  },
-
-  variants: {
-    elevation: {
-      true: {
-        boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)',
-      },
-    },
+    height: 64,
   },
 })
 
-export default function Header() {
-  const isOffset = useOffsetTop()
+type HeaderProps = {
+  hasNavbar?: boolean
+}
 
-  const isDesktop = useMediaQuery('(min-width: 960px)')
+export default function Header({ hasNavbar }: HeaderProps) {
+  const isDesktop = useMediaQuery({ minWidth: 840 })
 
   return (
-    <StyledHeader elevation={isOffset}>
-      <Logo />
-      {isDesktop && <SearchDesktop />}
-      <Grow />
-      {!isDesktop && <SearchMobile />}
-    </StyledHeader>
+    <Root>
+      <Container maxWidth="xl">
+        <Row>
+          <Logo />
+          {isDesktop && <Navbar />}
+          <Searchbar
+            detached={!isDesktop}
+            css={isDesktop ? { mr: 'auto', width: 540 } : { ml: 'auto' }}
+          />
+          <Settings />
+        </Row>
+        {!isDesktop && hasNavbar && <Navbar css={{ height: 48 }} />}
+      </Container>
+    </Root>
   )
 }

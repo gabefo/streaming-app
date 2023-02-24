@@ -1,9 +1,13 @@
 import React from 'react'
-import * as SelectPrimitive from '@radix-ui/react-select'
-import { styled } from 'stitches.config'
-import type { CSS } from 'stitches.config'
+
 import { Icon } from '@iconify/react'
+import * as SelectPrimitive from '@radix-ui/react-select'
+
+import { styled } from 'stitches.config'
+
 import Flex from './Flex'
+
+import type { CSS } from 'stitches.config'
 
 const SelectTrigger = styled(SelectPrimitive.Trigger, {
   position: 'relative',
@@ -19,17 +23,18 @@ const SelectTrigger = styled(SelectPrimitive.Trigger, {
   borderRadius: 4,
   bg: 'transparent',
   color: '$text',
-  font: '$openSans',
+  font: 'inherit',
   fontSize: '1rem',
   fontWeight: 400,
   lineHeight: '1.5rem',
-  textDecoration: 'none',
   whiteSpace: 'nowrap',
   cursor: 'pointer',
   userSelect: 'none',
 
-  '&:hover': {
-    borderColor: '$text',
+  '@hover': {
+    '&:hover': {
+      borderColor: '$text',
+    },
   },
 })
 
@@ -41,7 +46,7 @@ const SelectIcon = styled(SelectPrimitive.Icon, {
 const SelectContent = styled(SelectPrimitive.Content, {
   borderRadius: 4,
   bg: '$panel',
-  boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
+  boxShadow: '$8',
   overflow: 'hidden',
 })
 
@@ -50,38 +55,31 @@ const SelectViewport = styled(SelectPrimitive.Viewport, {
 })
 
 type SelectPrimitiveProps = React.ComponentProps<typeof SelectPrimitive.Root>
-type SelectProps = SelectPrimitiveProps & { css?: CSS }
+type SelectProps = SelectPrimitiveProps & { css?: CSS; placeholder?: React.ReactNode }
 
 export const Select = React.forwardRef<React.ElementRef<typeof SelectTrigger>, SelectProps>(
-  function Select({ children, ...props }, forwardedRef) {
-    return (
-      <SelectPrimitive.Root {...props}>
-        <SelectTrigger ref={forwardedRef}>
-          <SelectPrimitive.Value />
-          <SelectIcon>
-            <Icon icon="mdi:menu-down" />
-          </SelectIcon>
-        </SelectTrigger>
-        <SelectPrimitive.Portal>
-          <SelectContent>
-            <SelectPrimitive.ScrollUpButton>
-              <Icon icon="mdi:menu-up" />
-            </SelectPrimitive.ScrollUpButton>
-            <SelectViewport>{children}</SelectViewport>
-            <SelectPrimitive.ScrollDownButton>
-              <Icon icon="mdi:menu-down" />
-            </SelectPrimitive.ScrollDownButton>
-          </SelectContent>
-        </SelectPrimitive.Portal>
-      </SelectPrimitive.Root>
-    )
-  }
+  ({ children, css, placeholder, ...props }, forwardedRef) => (
+    <SelectPrimitive.Root {...props}>
+      <SelectTrigger ref={forwardedRef} css={css}>
+        <SelectPrimitive.Value placeholder={placeholder} />
+        <SelectIcon>
+          <Icon icon="mdi:menu-down" />
+        </SelectIcon>
+      </SelectTrigger>
+      <SelectPrimitive.Portal>
+        <SelectContent>
+          <SelectViewport>{children}</SelectViewport>
+        </SelectContent>
+      </SelectPrimitive.Portal>
+    </SelectPrimitive.Root>
+  )
 )
 
 const StyledItem = styled(SelectPrimitive.Item, {
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
+  outline: 0,
   py: 8,
   pl: 12,
   pr: 48,
@@ -97,7 +95,6 @@ const StyledItem = styled(SelectPrimitive.Item, {
   },
 
   '&[data-highlighted]': {
-    outline: 'none',
     bg: '$hover',
   },
 })
@@ -116,16 +113,14 @@ type SelectItemPrimitiveProps = React.ComponentProps<typeof SelectPrimitive.Item
 type SelectItemProps = SelectItemPrimitiveProps & { css?: CSS }
 
 export const SelectItem = React.forwardRef<React.ElementRef<typeof StyledItem>, SelectItemProps>(
-  function SelectItem({ children, ...props }, forwardedRef) {
-    return (
-      <StyledItem {...props} ref={forwardedRef}>
-        <SelectPrimitive.ItemText>
-          <Flex align="center">{children}</Flex>
-        </SelectPrimitive.ItemText>
-        <SelectItemIndicator>
-          <Icon icon="mdi:check" />
-        </SelectItemIndicator>
-      </StyledItem>
-    )
-  }
+  ({ children, ...props }, forwardedRef) => (
+    <StyledItem {...props} ref={forwardedRef}>
+      <SelectPrimitive.ItemText>
+        <Flex align="center">{children}</Flex>
+      </SelectPrimitive.ItemText>
+      <SelectItemIndicator>
+        <Icon icon="mdi:check" />
+      </SelectItemIndicator>
+    </StyledItem>
+  )
 )

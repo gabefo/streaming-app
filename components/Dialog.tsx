@@ -1,59 +1,67 @@
 import React from 'react'
+
 import * as DialogPrimitive from '@radix-ui/react-dialog'
-import { keyframes, styled } from 'stitches.config'
+
+import { styled } from 'stitches.config'
+
 import type { CSS, VariantProps } from 'stitches.config'
 
 export const Dialog = DialogPrimitive.Root
 
 export const DialogTrigger = DialogPrimitive.Trigger
 
-const fadeIn = keyframes({
-  from: { opacity: 0 },
-  to: { opacity: 1 },
-})
-
-const fadeOut = keyframes({
-  from: { opacity: 1 },
-  to: { opacity: 0 },
-})
-
 const StyledOverlay = styled(DialogPrimitive.Overlay, {
   position: 'fixed',
   inset: 0,
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   bg: 'rgba(0, 0, 0, 0.8)',
-  willChange: 'opacity',
-
-  '&[data-state="open"]': {
-    animation: `${fadeIn} 0.1s`,
-  },
-
-  '&[data-state="closed"]': {
-    animation: `${fadeOut} 0.1s`,
-  },
 })
 
 const StyledContent = styled(DialogPrimitive.Content, {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  bottom: 0,
-  right: 0,
+  position: 'relative',
+  display: 'flex',
+  flexDirection: 'column',
+  outline: 0,
   bg: '$panel',
   color: '$text',
-  boxShadow: '0 4px 32px rgba(0, 0, 0, 0.1)',
-  overflow: 'auto',
+  boxShadow: '$24',
+  overflow: 'hidden',
 
-  '&:focus': {
-    outline: 'none',
+  variants: {
+    width: {
+      xs: {
+        width: 280,
+      },
+      sm: {
+        width: 360,
+      },
+      md: {
+        width: 480,
+      },
+      lg: {
+        width: 600,
+      },
+    },
+    variant: {
+      standard: {
+        maxWidth: 'calc(100% - 64px)',
+        maxHeight: 'calc(100% - 64px)',
+        borderRadius: 4,
+      },
+      fullscreen: {
+        width: '100%',
+        height: '100%',
+        maxWidth: 'none',
+        maxHeight: 'none',
+        borderRadius: 0,
+      },
+    },
   },
 
-  '@md': {
-    top: '50%',
-    left: '50%',
-    bottom: 'auto',
-    right: 'auto',
-    borderRadius: 8,
-    transform: 'translate(-50%, -50%)',
+  defaultVariants: {
+    variant: 'standard',
   },
 })
 
@@ -64,27 +72,32 @@ type DialogContentProps = DialogContentPrimitiveProps & DialogContentVariants & 
 export const DialogContent = React.forwardRef<
   React.ElementRef<typeof StyledContent>,
   DialogContentProps
->(function DialogContent({ children, ...props }, forwardedRef) {
-  return (
-    <DialogPrimitive.Portal>
-      <StyledOverlay />
+>(({ children, ...props }, forwardedRef) => (
+  <DialogPrimitive.Portal>
+    <StyledOverlay>
       <StyledContent {...props} ref={forwardedRef}>
         {children}
       </StyledContent>
-    </DialogPrimitive.Portal>
-  )
-})
+    </StyledOverlay>
+  </DialogPrimitive.Portal>
+))
 
 export const DialogClose = DialogPrimitive.Close
 
+export const DialogHeader = styled('div', {
+  display: 'flex',
+  alignItems: 'center',
+  minHeight: 57,
+  flexShrink: 0,
+  px: 4,
+  borderBottom: '1px solid $border',
+})
+
 export const DialogTitle = styled(DialogPrimitive.Title, {
   m: 0,
-  p: 24,
-  pr: 72,
-  fontSize: '1.25rem',
-  fontWeight: 600,
+  fontSize: '1.125rem',
+  fontWeight: 500,
   lineHeight: '1.5rem',
-  flex: '0 0 auto',
 })
 
 export const DialogDescription = DialogPrimitive.Description

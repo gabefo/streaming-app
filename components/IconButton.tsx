@@ -1,38 +1,37 @@
 import { styled } from 'stitches.config'
 
-const IconButton = styled('button', {
-  position: 'relative',
-  display: 'inline-flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  p: 0,
-  border: 0,
-  outline: 0,
-  borderRadius: '50%',
+import ButtonBase from './ButtonBase'
+
+const IconButton = styled(ButtonBase, {
   flexShrink: 0,
-  bg: 'transparent',
+  borderRadius: '50%',
   fontSize: 24,
   fontWeight: 400,
   lineHeight: 1,
-  textDecoration: 'none',
-  cursor: 'pointer',
-  userSelect: 'none',
-  transition: 'background-color 0.1s',
+  transition: 'background-color 0.2s ease-in-out',
 
-  '&:hover': {
-    bg: '$hover',
+  '@hover': {
+    '&:hover': {
+      bg: '$hover',
+    },
+  },
+
+  '&:active': {
+    bg: '$active',
   },
 
   variants: {
     color: {
       default: {
-        color: '$textSecondary',
+        color: '$textDisabled',
       },
-      white: {
+      light: {
         color: 'rgba(255, 255, 255, 0.9)',
 
-        '&:hover': {
-          color: '#fff',
+        '@hover': {
+          '&:hover': {
+            color: '#fff',
+          },
         },
       },
     },
@@ -51,14 +50,56 @@ const IconButton = styled('button', {
       },
     },
     edge: {
-      start: {
+      start: {},
+      end: {},
+      both: {},
+    },
+  },
+
+  compoundVariants: [
+    {
+      size: 'small',
+      edge: 'start',
+      css: {
+        ml: -4,
+      },
+    },
+    {
+      size: 'small',
+      edge: 'end',
+      css: {
+        mr: -4,
+      },
+    },
+    {
+      size: 'medium',
+      edge: 'start',
+      css: {
         ml: -8,
       },
-      end: {
+    },
+    {
+      size: 'medium',
+      edge: 'end',
+      css: {
         mr: -8,
       },
     },
-  },
+    {
+      size: 'large',
+      edge: 'start',
+      css: {
+        ml: -12,
+      },
+    },
+    {
+      size: 'large',
+      edge: 'end',
+      css: {
+        mr: -12,
+      },
+    },
+  ],
 
   defaultVariants: {
     size: 'medium',

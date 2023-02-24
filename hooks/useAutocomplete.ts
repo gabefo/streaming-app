@@ -1,68 +1,120 @@
-import type { SearchMultipleResult } from 'lib/tmdb/types'
-import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
-import type { RefObject } from 'react'
+import React, { ReactNode } from 'react'
 
-export default function useAutocomplete(ref: RefObject<HTMLInputElement>) {
-  const { locale } = useRouter()
+import {
+  AutocompleteOptions as AutocompleteCoreOptions,
+  AutocompleteSource as AutocompleteCoreSource,
+  AutocompleteState as AutocompleteCoreState,
+  AutocompletePlugin as AutocompleteCorePlugin,
+  AutocompleteScopeApi,
+  BaseItem,
+  createAutocomplete,
+  GetSourcesParams,
+  InternalAutocompleteSource as InternalAutocompleteCoreSource,
+} from '@algolia/autocomplete-core'
 
-  const [query, setQuery] = useState('')
-  const [results, setResults] = useState<SearchMultipleResult[] | null>(null)
+type MaybePromise<TResolution> = Promise<TResolution> | TResolution
 
-  useEffect(() => {
-    const input = ref.current
+export type Template<TParams> = (params: TParams) => ReactNode
 
-    if (!input) {
-      return
-    }
+export type SourceTemplates<TItem extends BaseItem> = {
+  item: Template<{
+    item: TItem
+    state: AutocompleteState<TItem>
+  }>
+  header?: Template<{
+    state: AutocompleteState<TItem>
+    source: AutocompleteSource<TItem>
+    items: TItem[]
+  }>
+  footer?: Template<{
+    state: AutocompleteState<TItem>
+    source: AutocompleteSource<TItem>
+    items: TItem[]
+  }>
+  noResults?: Template<{
+    state: AutocompleteState<TItem>
+    source: AutocompleteSource<TItem>
+  }>
+}
 
-    let controller: AbortController | undefined
-    let timer: NodeJS.Timeout | undefined
+type WithTemplates<TType, TItem extends BaseItem> = TType & {
+  templates: SourceTemplates<TItem>
+}
 
-    const handleInput = (event: Event) => {
-      const element = event.target as HTMLInputElement
-      const { value } = element
+export interface AutocompleteCoreSourceWithDocs<TItem extends BaseItem>
+  extends AutocompleteCoreSource<TItem> {
+  sourceId: string
+}
 
-      setQuery(value)
+export type AutocompleteSource<TItem extends BaseItem> = WithTemplates<
+  AutocompleteCoreSourceWithDocs<TItem>,
+  TItem
+>
 
-      if (controller) {
-        controller.abort()
-      }
+export type InternalAutocompleteSource<TItem extends BaseItem> = WithTemplates<
+  InternalAutocompleteCoreSource<TItem>,
+  TItem
+>
 
-      if (timer) {
-        clearTimeout(timer)
-      }
+export type AutocompleteCollection<TItem extends BaseItem> = {
+  source: InternalAutocompleteSource<TItem>
+  items: TItem[]
+}
 
-      if (value) {
-        timer = setTimeout(() => {
-          controller = new AbortController()
-          const { signal } = controller
-          fetch(`/api/tmdb/search/multi?language=${locale}&query=${encodeURIComponent(value)}`, {
-            signal,
-          })
-            .then((res) => res.json())
-            .then((data) => setResults(data.results))
-            .catch(() => {})
-        }, 250)
-      } else {
-        setResults(null)
-      }
-    }
+export type AutocompleteState<TItem extends BaseItem> = Omit<
+  AutocompleteCoreState<TItem>,
+  'collections'
+> & {
+  collections: Array<AutocompleteCollection<TItem>>
+}
 
-    input.addEventListener('input', handleInput)
+export type AutocompletePlugin<TItem extends BaseItem, TData = unknown> = Omit<
+  AutocompleteCorePlugin<TItem, TData>,
+  'getSources'
+> & {
+  getSources?: GetSources<TItem>
+}
 
-    return () => {
-      if (controller) {
-        controller.abort()
-      }
+export interface OnStateChangeProps<TItem extends BaseItem> extends AutocompleteScopeApi<TItem> {
+  state: AutocompleteState<TItem>
+  prevState: AutocompleteState<TItem>
+}
 
-      if (timer) {
-        clearTimeout(timer)
-      }
+export type GetSources<TItem extends BaseItem> = (
+  params: GetSourcesParams<TItem>
+) => MaybePromise<Array<AutocompleteSource<TItem> | boolean | undefined>>
 
-      input.removeEventListener('input', handleInput)
-    }
-  }, [locale, ref])
+export interface AutocompleteOptions<TItem extends BaseItem>
+  extends AutocompleteCoreOptions<TItem> {
+  getSources?: GetSources<TItem>
+  initialState?: Partial<AutocompleteState<TItem>>
+  onStateChange?: (props: OnStateChangeProps<TItem>) => void
+  plugins?: Array<AutocompletePlugin<any, any>>
+}
 
-  return { query, results }
+export function useAutocomplete<TItem extends BaseItem>(options: AutocompleteOptions<TItem>) {
+  const [state, setState] = React.useState<AutocompleteState<TItem>>(() => ({
+    collections: [],
+    completion: null,
+    context: {},
+    isOpen: false,
+    query: '',
+    activeItemId: null,
+    status: 'idle',
+  }))
+
+  const autocomplete = React.useMemo(
+    () =>
+      createAutocomplete<TItem, React.BaseSyntheticEvent, React.MouseEvent, React.KeyboardEvent>({
+        ...options,
+        onStateChange(params) {
+          setState(params.state as AutocompleteState<TItem>)
+          options.onStateChange?.(params as OnStateChangeProps<TItem>)
+        },
+      }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
+  )
+
+  return { autocomplete, state }
 }

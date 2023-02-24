@@ -1,5 +1,7 @@
-import * as TooltipPrimitive from '@radix-ui/react-tooltip'
 import React from 'react'
+
+import * as TooltipPrimitive from '@radix-ui/react-tooltip'
+
 import { keyframes, styled } from 'stitches.config'
 
 const fadeIn = keyframes({
@@ -14,7 +16,7 @@ const StyledContent = styled(TooltipPrimitive.Content, {
   bg: '$tooltip',
   color: '$tooltipText',
   fontSize: '0.875rem',
-  fontWeight: 600,
+  fontWeight: 500,
   lineHeight: '1.25rem',
   userSelect: 'none',
   willChange: 'opacity',
@@ -25,8 +27,11 @@ const StyledContent = styled(TooltipPrimitive.Content, {
 })
 
 type TooltipPrimitiveProps = React.ComponentProps<typeof TooltipPrimitive.Root>
-type TooltipContentProps = React.ComponentProps<typeof StyledContent>
-type TooltipProps = TooltipPrimitiveProps & TooltipContentProps & { content: React.ReactNode }
+type TooltipProps = TooltipPrimitiveProps &
+  React.ComponentProps<typeof TooltipPrimitive.Content> & {
+    children: React.ReactNode
+    content: React.ReactNode
+  }
 
 export default function Tooltip({
   children,

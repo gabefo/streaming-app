@@ -2,6 +2,7 @@ import { styled } from 'stitches.config'
 
 const Grid = styled('div', {
   display: 'grid',
+  overflow: 'hidden',
 
   variants: {
     align: {
@@ -43,21 +44,30 @@ const Grid = styled('div', {
       },
     },
 
-    flow: {
-      row: {
-        gridAutoFlow: 'row',
+    rows: {
+      1: {
+        gridTemplateRows: 'repeat(1, 1fr)',
+        gridAutoRows: 0,
       },
-      column: {
-        gridAutoFlow: 'column',
+      2: {
+        gridTemplateRows: 'repeat(2, 1fr)',
+        gridAutoRows: 0,
       },
-      dense: {
-        gridAutoFlow: 'dense',
+      3: {
+        gridTemplateRows: 'repeat(3, 1fr)',
+        gridAutoRows: 0,
       },
-      'row-dense': {
-        gridAutoFlow: 'row dense',
+      4: {
+        gridTemplateRows: 'repeat(4, 1fr)',
+        gridAutoRows: 0,
       },
-      'column-dense': {
-        gridAutoFlow: 'column dense',
+      5: {
+        gridTemplateRows: 'repeat(5, 1fr)',
+        gridAutoRows: 0,
+      },
+      6: {
+        gridTemplateRows: 'repeat(6, 1fr)',
+        gridAutoRows: 0,
       },
     },
 
@@ -79,24 +89,6 @@ const Grid = styled('div', {
       },
       6: {
         gridTemplateColumns: 'repeat(6, 1fr)',
-      },
-      7: {
-        gridTemplateColumns: 'repeat(7, 1fr)',
-      },
-      8: {
-        gridTemplateColumns: 'repeat(8, 1fr)',
-      },
-      9: {
-        gridTemplateColumns: 'repeat(9, 1fr)',
-      },
-      10: {
-        gridTemplateColumns: 'repeat(10, 1fr)',
-      },
-      11: {
-        gridTemplateColumns: 'repeat(11, 1fr)',
-      },
-      12: {
-        gridTemplateColumns: 'repeat(12, 1fr)',
       },
     },
   },

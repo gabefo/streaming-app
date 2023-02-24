@@ -1,0 +1,61 @@
+{
+  "extends": ["next", "prettier"],
+  "rules": {
+    "react/display-name": "off",
+    "import/first": "error",
+    "import/newline-after-import": "error",
+    "import/no-duplicates": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "object",
+          "type"
+        ],
+        "alphabetize": {
+          "order": "asc"
+        },
+        "newlines-between": "always",
+        "pathGroups": [
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "@tmdb/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@hooks/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@lib/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@utils/**",
+            "group": "external",
+            "position": "after"
+          },
+          {
+            "pattern": "@components/**",
+            "group": "external",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": ["react"]
+      }
+    ]
+  }
+}

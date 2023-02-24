@@ -1,7 +1,9 @@
-import { API_URL, defaultOptions } from 'lib/tmdb/api'
-import type { Data, ResponseError } from 'lib/tmdb/types'
-import type { NextApiRequest, NextApiResponse } from 'next'
 import { stringify } from 'querystring'
+
+import { API_URL, defaultOptions } from '@tmdb/api'
+import type { Data, ResponseError } from '@tmdb/types'
+
+import type { NextApiRequest, NextApiResponse } from 'next'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<Data | ResponseError>) => {
   const { method, query } = req

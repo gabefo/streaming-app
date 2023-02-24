@@ -1,13 +1,15 @@
-import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/router'
 import { RemoveScroll } from 'react-remove-scroll'
+
 import { keyframes, styled } from 'stitches.config'
 
 const Overlay = styled('div', {
   position: 'fixed',
   inset: 0,
   bg: '$overlay',
-  zIndex: 1000,
+  zIndex: 9999,
 })
 
 const BarWrapper = styled('div', {
@@ -60,8 +62,10 @@ export default function ProgressBar() {
   const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    const handleStart = () => {
-      setLoading(true)
+    const handleStart = (url: string, { shallow }: { shallow: boolean }) => {
+      if (!shallow) {
+        setLoading(true)
+      }
     }
 
     const handleStop = () => {

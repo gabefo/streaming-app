@@ -1,12 +1,17 @@
 import { keyframes, styled } from 'stitches.config'
-import Box from './Box'
 
 const Root = styled('div', {
   position: 'fixed',
   inset: 0,
   display: 'flex',
+  flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
+})
+
+const CircleWrapper = styled('div', {
+  display: 'flex',
+  gap: 8,
 })
 
 const pulse = keyframes({
@@ -16,8 +21,7 @@ const pulse = keyframes({
 })
 
 const Circle = styled('span', {
-  display: 'inline-block',
-  m: 4,
+  display: 'inline-flex',
   width: 12,
   height: 12,
   borderRadius: '50%',
@@ -46,11 +50,11 @@ const Circle = styled('span', {
 export default function LoadingScreen() {
   return (
     <Root>
-      <Box>
+      <CircleWrapper>
         <Circle order={1} />
         <Circle order={2} />
         <Circle order={3} />
-      </Box>
+      </CircleWrapper>
     </Root>
   )
 }
