@@ -1,4 +1,14 @@
-# This is a movie catalog app created using Next.js, Stitches and TypeScript
+# A streaming guide for movies and TV shows
+
+## Technologies
+
+This project was developed with the following technologies:
+
+- [TypeScript](https://www.typescriptlang.org/)
+- [Next.js](https://nextjs.org/)
+- [TMDB API](https://www.themoviedb.org/)
+- [Stitches](https://stitches.dev/)
+- [Radix UI](https://www.radix-ui.com/)
 
 ## Demo
 
